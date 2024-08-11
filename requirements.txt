@@ -1,0 +1,2 @@
+Flask==2.2.5
+snowflake-connector-python==3.12.0
