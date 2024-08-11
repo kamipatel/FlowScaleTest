@@ -1,6 +1,6 @@
 const jsforce = require('jsforce');
 
-const s = 'b2';
+const s = '100K2';
 
 const conn = new jsforce.Connection({
     oauth2: {
@@ -17,7 +17,7 @@ const conn = new jsforce.Connection({
       const batch = records.slice(i, i + batchSize);
       try {
           const result = await conn.sobject('Contact').create(batch);
-          console.log('Batch insert result:', result);
+          //console.log('Batch insert result:', result);
       } catch (error) {
           console.error('Error inserting batch:', error);
       }
@@ -30,10 +30,10 @@ const createContacts = async () => {
 
     try {
         const dummyContacts = [];  // Array to store promises
-        for (let i = 1; i <= 10000; i++) {
+        for (let i = 1; i <= 50000; i++) {
             const contact = {
-                FirstName: `Test${i}`,
-                LastName: `User${i}`,
+                FirstName: `BTest${i}`,
+                LastName: `BUser${i}`,
                 Email: `flowscaletest+${i}@kam.test${s}`
             };
             //contacts.push(conn.sobject('Contact').create(contact));
@@ -42,12 +42,12 @@ const createContacts = async () => {
         // Wait for all promises to resolve (all contacts created)
 
         insertInBatches(dummyContacts, 200).then(() => {
-          console.log('All records inserted');
+          //console.log('All records inserted');
         }).catch((err) => {
             console.error('Error:', err);
         });
         
-        console.log('All contacts created!');
+        console.log('Contacts creattion queued!');
     } catch (error) {
         console.error('Error:', error);
     }
@@ -64,7 +64,7 @@ async function loginToSalesforce(username, password) {
 }
 
 // Call the async function
-loginToSalesforce('kamlesh.patel@force.com', 'xyz')
+loginToSalesforce('kamlesh.patel-kddq@force.com', '')
   .then(() => {
     console.log("Login successful");
     createContacts();

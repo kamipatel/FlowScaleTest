@@ -49,8 +49,8 @@ def log_data():
             outcome = random.choice(outcomes)
             results.append({'Outcome': outcome})
 
-            # Insert into Snowflake
             '''
+            # Insert into Snowflake
             cursor.execute(
                 "INSERT INTO Log (CampaignId, ContactId, Outcome) VALUES (%s, %s, %s)",
                 (campaign_id, contact_id, outcome)
@@ -90,3 +90,4 @@ def log_data():
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))  # Default to port 5000 if not set
     app.run(host='0.0.0.0', port=port)
+    
